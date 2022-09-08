@@ -4,7 +4,7 @@ import {
   useFonts,
   Rubik_300Light,
   Rubik_400Regular,
-  Rubik_500Medium
+  Rubik_500Medium,
 } from '@expo-google-fonts/rubik';
 import { NavigationContainer } from '@react-navigation/native';
 import * as SplashScreen from 'expo-splash-screen';
@@ -15,24 +15,24 @@ import { AppRoutes } from './src/routes/app.routes';
 export default function App() {
   const [appIsReady, setAppIsReady] = useState(false);
 
-  useEffect(() => {
-    async function prepare() {
-      try {
-        await SplashScreen.preventAutoHideAsync();
-        await Font.loadAsync({
-          Rubik_300Light,
-          Rubik_400Regular,
-          Rubik_500Medium
-        });
-      } catch (e) {
-        console.warn(e);
-      } finally {
-        setAppIsReady(true);
-      }
+  async function prepare() {
+    try {
+      await SplashScreen.preventAutoHideAsync();
+      await Font.loadAsync({
+        Rubik_300Light,
+        Rubik_400Regular,
+        Rubik_500Medium,
+      });
+    } catch (e) {
+      console.warn(e);
+    } finally {
+      setAppIsReady(true);
     }
+  }
 
+  useEffect(() => {
     prepare();
-  }, [])
+  }, []);
 
   const onLayoutRootView = useCallback(async () => {
     if (appIsReady) {
@@ -48,13 +48,13 @@ export default function App() {
     <View
       onLayout={onLayoutRootView}
       style={{
-        flex: 1
+        flex: 1,
       }}
     >
       <NavigationContainer>
         <StatusBar
-          barStyle="light-content"
-          backgroundColor="transparent"
+          barStyle='light-content'
+          backgroundColor='transparent'
           translucent
         />
         <AppRoutes />
